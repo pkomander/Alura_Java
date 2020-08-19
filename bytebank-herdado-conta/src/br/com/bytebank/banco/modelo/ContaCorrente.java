@@ -23,6 +23,8 @@ public class ContaCorrente extends Conta implements Tributavel {
 		return super.saldo * 0.01;
 	}
 	
+	//toString retorna o nome da classe mais a sua representação hexadecimal o endereço no espaço de memoria
+	//para alterar este comportamento utiliza-se o metodo toString
 	@Override
 	public String toString() {
 		return "ContaCorrente, " + super.toString();

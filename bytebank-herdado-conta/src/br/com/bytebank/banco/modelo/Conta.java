@@ -9,14 +9,14 @@ package br.com.bytebank.banco.modelo;
 
 
 //classe conta, com quatro atributos
-public abstract class Conta {
+public abstract class Conta extends Object implements Comparable<Conta>{
 	//so podemos ver o valor de saldo atraves do metodo getSaldo
 	protected double saldo;
 	private int agencia;
 	private int numero;
 	//fazendo referencia a classe cliente
 	private Cliente titular;
-	private static int total;//total passou a ser da classe implementando a contagem de contas
+	private static int total = 0;//total passou a ser da classe implementando a contagem de contas
 	
 	
 	/**
@@ -103,9 +103,36 @@ public abstract class Conta {
 		return Conta.total;
 	}
 	
+	//sobreescrevendo o metodo equals na classe mãe
+	@Override
+	public boolean equals(Object ref) {
+		
+		//fazendo o cast de dados da classe Object para conta
+		Conta outra = (Conta) ref;
+		
+		if(this.agencia != outra.agencia) {
+			return false;
+		}
+		
+		if(this.numero != outra.numero) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public int compareTo(Conta outra) {
+		return Double.compare(this.saldo, outra.saldo);
+	}
+	
+	
+	
+	//toString retorna o nome da classe mais a sua representação hexadecimal o endereço no espaço de memoria
+	//para alterar este comportamento utiliza-se o metodo toString
 	@Override
 	public String toString() {
-		return "Numero: " + this.numero + ", Agencia: " + this.agencia;
+		return "Numero: " + this.numero + ", Agencia: " + this.agencia + ", Saldo: " + this.saldo;
 	}
 	
 	
